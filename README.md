@@ -50,5 +50,5 @@ home="/home/username/"
 ```bash
 git clone https://github.com/swisscom/pongo2-runner
 cd pongo2-runner
-CGO=0 go build -o ./pongo2-runner ./cmd
+CGO_ENABLED=0 go build -o ./pongo2-runner ./cmd
 ```
