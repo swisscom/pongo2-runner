@@ -9,6 +9,8 @@ import (
 	"strings"
 )
 
+const Pongo2RunnerNamespaceFilter = "_pongo2Runner_namespace"
+
 type Pongo2Runner struct {
 	source io.Reader
 	directory string
@@ -28,6 +30,7 @@ func New(source io.Reader) Pongo2Runner {
 	if err != nil {
 		runnerDir = os.TempDir()
 	}
+	registerFilters()
 	return Pongo2Runner{
 		source: source,
 		directory: runnerDir,
@@ -57,7 +60,6 @@ func (p *Pongo2Runner) Render() (string, error) {
 	}
 
 	ctx["env"] = envMap
-
 	result, err := template.Execute(ctx)
 	if err != nil {
 		return "", fmt.Errorf("unable to render template: %v", err)
