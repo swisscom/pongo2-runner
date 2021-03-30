@@ -60,6 +60,7 @@ func (p *Pongo2Runner) Render() (string, error) {
 	}
 
 	ctx["env"] = envMap
+	template.Options.AutoEscape = false
 	result, err := template.Execute(ctx)
 	if err != nil {
 		return "", fmt.Errorf("unable to render template: %v", err)

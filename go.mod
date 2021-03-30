@@ -8,3 +8,5 @@ require (
 	github.com/sirupsen/logrus v1.8.1
 	github.com/stretchr/testify v1.2.2
 )
+
+replace github.com/flosch/pongo2/v4 => github.com/swisscom/pongo2/v4 v4.0.3-0.20210330161743-b5eff3243df2
