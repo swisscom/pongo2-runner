@@ -20,9 +20,16 @@ func main() {
 		logger.SetLevel(logrus.DebugLevel)
 	}
 
-	file, err := os.Open(args.Source)
-	if err != nil {
-		logger.Fatalf("unable to open source file: %v", err)
+	var file *os.File
+	var err error
+
+	if args.Source == "-" {
+		file = os.Stdin
+	} else {
+		file, err = os.Open(args.Source)
+		if err != nil {
+			logger.Fatalf("unable to open source file: %v", err)
+		}
 	}
 
 	runner := pongo2runner.New(file)
