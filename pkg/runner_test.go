@@ -32,6 +32,9 @@ func testRender(t *testing.T, fileName string) {
 		t.Fatalf("unable to open result file: %v", err)
 	}
 
+	os.Setenv("SPECIAL", "%!%s^$_%&")
+	os.Setenv("CC", "clang")
+
 	pr := pongo2runner.New(file)
 	res, err := pr.Render()
 
