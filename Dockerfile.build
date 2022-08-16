@@ -1,0 +1,4 @@
+FROM golang:1.18-buster
+WORKDIR /app
+COPY . /app
+RUN make build-all
