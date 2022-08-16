@@ -1,4 +1,7 @@
-FROM golang:1.16
-COPY . $GOPATH/src/github.com/swisscom/pongo2-runner
-WORKDIR $GOPATH/src/github.com/swisscom/pongo2-runner
-RUN CGO_ENABLED=0 go build -o ./pongo2-runner ./cmd && strip ./pongo2-runner
+FROM golang:1.18-buster AS builder
+WORKDIR /app
+COPY . /app
+RUN make build && strip ./build/pongo2-runner
+
+FROM alpine:3.16
+COPY --from=builder /app/build/pongo2-runner /usr/bin/pongo2-runner
