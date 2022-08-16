@@ -14,6 +14,10 @@ func TestPongo2Runner_Render(t *testing.T) {
 		t.Fatalf("unable to list dir contents: %v", err)
 	}
 
+	os.Clearenv()
+	os.Setenv("CC", "clang")
+	os.Setenv("SHELL", "/bin/zsh")
+
 	for _, e := range dirEntries {
 		if !e.IsDir() {
 			testRender(t, e.Name())
