@@ -39,5 +39,5 @@ func main() {
 		logger.Fatalf("unable to render template: %v", err)
 	}
 
-	fmt.Printf(result)
+	fmt.Print(result)
 }
