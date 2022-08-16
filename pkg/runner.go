@@ -2,17 +2,17 @@ package pongo2runner
 
 import (
 	"fmt"
-	"github.com/flosch/pongo2/v4"
+	"github.com/flosch/pongo2/v6"
 	"io"
 	"io/ioutil"
 	"os"
 	"strings"
 )
 
-const Pongo2RunnerNamespaceFilter = "_pongo2Runner_namespace"
+const NamespaceFilter = "_pongo2Runner_namespace"
 
 type Pongo2Runner struct {
-	source io.Reader
+	source    io.Reader
 	directory string
 }
 
@@ -32,7 +32,7 @@ func New(source io.Reader) Pongo2Runner {
 	}
 	registerFilters()
 	return Pongo2Runner{
-		source: source,
+		source:    source,
 		directory: runnerDir,
 	}
 }
@@ -60,7 +60,6 @@ func (p *Pongo2Runner) Render() (string, error) {
 	}
 
 	ctx["env"] = envMap
-	template.Options.AutoEscape = false
 	result, err := template.Execute(ctx)
 	if err != nil {
 		return "", fmt.Errorf("unable to render template: %v", err)
